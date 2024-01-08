@@ -21,6 +21,8 @@ const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}/full`);
   const recommendations = await getAnimeResponse(`anime/${id}/recommendations`);
   const characters = await getAnimeResponse(`anime/${id}/characters`);
+  const episodes = await getAnimeResponse(`anime/${id}/episodes`);
+  var episodeCounter = 0;
 
   return (
     <div
@@ -130,7 +132,7 @@ const Page = async ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          <div className="md:flex md:flex-col gap-4 hidden md:visible">
+          <div className="md:flex md:flex-col gap-4 hidden md:visible w-120">
             <VideoPlayer
               youtubeID={anime.data.trailer.youtube_id}
               w={400}
@@ -139,26 +141,90 @@ const Page = async ({ params: { id } }) => {
             <div className="uppercase text-center bg-zinc-300 text-zinc-950 text-sm font-bold p-2 flex flex-row items-center gap-2 justify-center">
               trailer video
             </div>
+            <div className="py-4">
+              <h2 className="text-2xl border-b-1 border-b-slate-200/50 pb-2">
+                Episodes
+              </h2>
+              <div className="relative mt-2 mx-auto h-120 overflow-y-auto">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead className="text-xs text-gray-700 uppercase dark:bg-zinc-800 dark:text-gray-400 sticky top-0">
+                    <tr className="">
+                      <th
+                        scope="col"
+                        className="px-2 py-3 text-center"
+                      >
+                        Episode
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-2 py-3 text-center"
+                      >
+                        Title
+                      </th>
+                      <th scope="col" className="px-2 py-3 text-center">
+                        Score
+                      </th>
+                    </tr>
+                  </thead>
+
+                  {episodes.data
+                    ? episodes.data.map((episode) => {
+                        episodeCounter++;
+                        return (
+                          <tbody className="text-sm">
+                            <tr className="dark:border-gray-700">
+                              <th
+                                scope="row"
+                                className="px-2 py-4 text-gray-900 whitespace-nowrap dark:text-white text-center border-r border-zinc-700"
+                              >
+                                {episodeCounter}
+                              </th>
+                              <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
+                                
+                                  <Link
+                                    href={`/anime/${id}/episodes/${episodeCounter}`}
+                                  >
+                                    <h3 className="text-slate-200 hover:text-slate-50 transition-all">
+                                      {episode.title}
+                                    </h3>
+                                  </Link>
+                              
+                              </td>
+                              <td className="px-2 py-4 text-center whitespace-nowrap">
+                                ⭐ {episode.score}
+                              </td>
+                            </tr>
+                          </tbody>
+                        );
+                      })
+                    : ""}
+                </table>
+              </div>
+            </div>
           </div>
         </div>
 
         <div>
           <h2 className="text-2xl text-white">Characters</h2>
-          <div className="flex flex-row gap-4 overflow-y-auto custom-scrollbar">
+          <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden custom-scrollbar">
             {characters.data.map((character) => {
               return (
                 <Link
                   href={`/character/${character.character.mal_id}`}
                   className="w-full py-4"
                 >
-                  <Image
-                    src={character.character.images.webp.image_url}
-                    width={247}
-                    height={350}
-                    alt={character.character.name}
-                    className="h-52 object-cover"
-                  />
-                  <h3 className="w-32 pt-4">{character.character.name}</h3>
+                  <div className="w-40 h-full bg-amber-500 hover:scale-105 transition-all duration-300">
+                    <Image
+                      src={character.character.images.webp.image_url}
+                      width={247}
+                      height={350}
+                      alt={character.character.name}
+                      className="h-44 object-cover"
+                    />
+                    <h3 className="w-32 h-16 p-2 text-zinc-950 font-semibold">
+                      {character.character.name}
+                    </h3>
+                  </div>
                 </Link>
               );
             })}
@@ -179,7 +245,7 @@ const Page = async ({ params: { id } }) => {
                     alt={recommendation.entry.title}
                     width={350}
                     height={350}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover hover:scale-105 transition-all duration-300"
                   />
                   <h2 className="pt-4 hover:text-slate-200/90">
                     {recommendation.entry.title}
