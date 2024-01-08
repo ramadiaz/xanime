@@ -8,3 +8,8 @@ export const getBannerResponse = async(resource, query) => {
     const result = await response.json()
     return result
 }
+export const getGithubResponse = async(resource) => {
+    const response = await fetch(`${process.env.NEXT_GITHUB_USER_URL}`)
+    const result = await response.json()
+    return result
+}

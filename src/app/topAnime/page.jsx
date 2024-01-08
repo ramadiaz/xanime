@@ -11,21 +11,25 @@ const Page = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const topAnimeAPI = await getAnimeResponse("top/anime");
-    setTopAnime(topAnimeAPI);
-    setLoading(false)
+    try {
+      const topAnimeAPI = await getAnimeResponse(`top/anime`, `limit=20`);
+      setTopAnime(topAnimeAPI);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
 
+
   return (
     <div className="bg-zinc-950 text-slate-200">
-      <Header title="TOP ANIME SERIES" />
+      <Header title="TOP 20 ANIME " />
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-800 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-zinc-800 dark:text-gray-400">
             <tr>
               <th
                 scope="col"
@@ -52,14 +56,14 @@ const Page = () => {
                 </td>
               </tr>
             ) : (
-              topAnime.data.map((anime, index) => {
+              topAnime.data?.map((anime, index) => {
                 return (
                   <tr className="bg- border-b dark:border-gray-700">
                     <th
                       scope="row"
                       className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center border-r border-zinc-700"
                     >
-                      #{anime.rank}
+                      #{index + 1}
                     </th>
                     <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
                       <Link href={`/anime/${anime.mal_id}`} key={index}>
@@ -79,7 +83,7 @@ const Page = () => {
                           </h3>
                         </Link>
                         <h3>{anime.rating}</h3>
-                        <h3>Genre: {anime.genres[0].name}</h3>
+                        <h3>Genre: {anime.genres[0]?.name}</h3>
                         <h3>{anime.members.toLocaleString()} members</h3>
                       </div>
                     </td>

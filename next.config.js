@@ -9,8 +9,15 @@ const nextConfig = {
                 hostname: "drive.google.com"
             },
             {
+                hostname: "api.github.com"
+            },
+            {
+                hostname: "avatars.githubusercontent.com"
+            },
+            {
                 hostname: "ramadiaz.github.com"
             }
+
         ]
     }
 }
