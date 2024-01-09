@@ -198,7 +198,7 @@ const Page = ({ params: { id } }) => {
                       episodes.data.map((episode, index) => {
                         episodeCounter++;
                         return (
-                          <tr className="dark:border-gray-700">
+                          <tr className="dark:border-gray-700" key={index}>
                             <th
                               scope="row"
                               className="px-2 py-4 text-gray-900 whitespace-nowrap dark:text-white text-center border-r border-zinc-700"
@@ -208,7 +208,6 @@ const Page = ({ params: { id } }) => {
                             <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
                               <Link
                                 href={`/anime/${id}/episodes/${episodeCounter}`}
-                                key={index}
                               >
                                 <h3 className="text-slate-200 hover:text-slate-50 transition-all">
                                   {episode.title}
@@ -242,10 +241,10 @@ const Page = ({ params: { id } }) => {
               return (
                 <Link
                   href={`/character/${character.character.mal_id}`}
-                  className="w-full py-4"
+                  className="w-max py-4"
                   key={index}
                 >
-                  <div className="w-40 h-full bg-amber-500 hover:scale-105 transition-all duration-300">
+                  <div className="w-40 h-full hover:scale-105 transition-all duration-300">
                     <Image
                       src={character.character.images.webp.image_url}
                       width={247}
@@ -253,7 +252,7 @@ const Page = ({ params: { id } }) => {
                       alt={character.character.name}
                       className="h-44 object-cover"
                     />
-                    <h3 className="w-32 h-16 p-2 text-zinc-950 font-semibold">
+                    <h3 className="h-16 p-2 text-zinc-950 bg-amber-500  font-semibold">
                       {character.character.name}
                     </h3>
                   </div>

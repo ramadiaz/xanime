@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Utilites/Header";
 import Image from "next/image";
 import { getAnimeResponse } from "../libs/api-libs";
 import Link from "next/link";
@@ -26,8 +25,11 @@ const Page = () => {
 
   return (
     <div className="bg-zinc-950 text-slate-200">
-      <Header title="TOP 20 ANIME " />
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto">
+      <div className="py-12">
+        <h1 className="text-2xl text-slate-200 font-bold">TOP 20 ANIME</h1>
+        <h2 className="text-slate-200/70">Based on My Anime List</h2>
+      </div>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-zinc-800 dark:text-gray-400">
             <tr>
