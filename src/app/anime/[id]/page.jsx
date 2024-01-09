@@ -66,7 +66,7 @@ const Page = ({ params: { id } }) => {
             <div className="mx-auto">
               <VideoPlayer
                 youtubeID={anime.data?.trailer.youtube_id}
-                w={356}
+                w={330}
                 h={203}
               />
             </div>

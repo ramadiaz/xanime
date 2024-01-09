@@ -2,7 +2,6 @@ import { getGithubResponse } from "@/app/libs/api-libs";
 
 const Footer = async () => {
   const githubRama = await getGithubResponse();
-  console.log(githubRama);
   return (
     <div className="bg-white dark:bg-zinc-800">
       <div className="w-full h-44 bg-gradient-to-b from-zinc-950 "></div>
