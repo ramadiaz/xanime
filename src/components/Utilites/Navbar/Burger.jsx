@@ -33,18 +33,18 @@ const Burger = () => {
         <div className="absolute top-full left-0 bg-zinc-900/90 h-screen w-2/5 pt-4 z-40 transform transition-all duration-300">
           <ul className="flex flex-col text-slate-200">
             <li className='pl-4 py-2 uppercase text-xs font-bold text-slate-200/80'>Discover</li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topAnime">Top Anime</Link></li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topCharacter">Top Character</Link></li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topManga">Top Manga</Link></li>
+            <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top Anime</Link>
+            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
+            <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top Manga</Link>
           </ul>
         </div>
       ) : (
         <div className="absolute top-full left-0 bg-zinc-900/90 h-screen w-2/5 pt-4 z-40 transform -translate-x-full transition-all duration-300">
           <ul className="flex flex-col text-slate-200">
             <li className='pl-4 py-2 uppercase text-xs font-bold text-slate-200/80'>Discover</li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topAnime">Top Anime</Link></li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topCharacter">Top Character</Link></li>
-            <li className='pl-4 py-2 hover:bg-zinc-700'><Link href="/topManga">Top Manga</Link></li>
+            <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top Anime</Link>
+            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
+            <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top Manga</Link>
           </ul>
         </div>
       )}
