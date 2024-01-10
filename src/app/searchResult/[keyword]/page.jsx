@@ -4,10 +4,11 @@ import { getAnimeResponse } from "@/app/libs/api-libs";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
+import Link from "next/link";
 
 const Page = ({ params: { keyword } }) => {
   const [animeResult, setAnimeResult] = useState([]);
-  const [mangaResult, setMangaResult] = useState([])
+  const [mangaResult, setMangaResult] = useState([]);
   const [charaResult, setCharaResult] = useState([]);
   const [totalFound, setTotalFound] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,21 +16,27 @@ const Page = ({ params: { keyword } }) => {
   const fetchData = async () => {
     try {
       const animeResultAPI = await getAnimeResponse("anime", `q=${keyword}`);
-      const mangaResultAPI = await getAnimeResponse("manga", `q=${keyword}`)
+      const mangaResultAPI = await getAnimeResponse("manga", `q=${keyword}`);
       const charaResultAPI = await getAnimeResponse(
         "characters",
-        `q=${keyword}`
+        `q=${keyword}&limit=10`
       );
 
       setAnimeResult(animeResultAPI);
-      setMangaResult(mangaResultAPI)
+      setMangaResult(mangaResultAPI);
       setCharaResult(charaResultAPI);
 
-      const totalAnimeResults = animeResultAPI.data ? animeResultAPI.data.length : 0;
-      const totalMangaResults = mangaResultAPI.data ? mangaResultAPI.data.length : 0;
-      const totalCharaResults = charaResultAPI.data ? charaResultAPI.data.length : 0;
+      const totalAnimeResults = animeResultAPI.data
+        ? animeResultAPI.data.length
+        : 0;
+      const totalMangaResults = mangaResultAPI.data
+        ? mangaResultAPI.data.length
+        : 0;
+      const totalCharaResults = charaResultAPI.data
+        ? charaResultAPI.data.length
+        : 0;
 
-      setTotalFound(totalAnimeResults + totalMangaResults + totalCharaResults)
+      setTotalFound(totalAnimeResults + totalMangaResults + totalCharaResults);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -38,6 +45,13 @@ const Page = ({ params: { keyword } }) => {
 
   useEffect(() => {
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
 
   return (
@@ -70,32 +84,37 @@ const Page = ({ params: { keyword } }) => {
                         className="border-b-1 border-b-slate-200/50"
                       >
                         <th className="px-4 py-2 content-center w-32 md:w-36 text-center">
-                          <Image
-                            src={anime.images.webp.image_url}
-                            width={350}
-                            height={350}
-                            alt={`poster of ${anime.title}`}
-                            className="w-full"
-                          />
+                          <Link href={`/anime/${anime.mal_id}`}>
+                            <Image
+                              src={anime.images.webp.image_url}
+                              width={350}
+                              height={350}
+                              alt={`poster of ${anime.title}`}
+                              className="w-full hover:scale-105 transition-all duration-300"
+                            />
+                          </Link>
                         </th>
                         <td className="px-4 py-2">
-                          <h2 className="text-lg">
-                            {anime.title} {anime.year ? `(${anime.year})` : ""}
-                          </h2>
-                          <h3 className="opacity-70">{anime.rating}</h3>
-                          <h3 className="opacity-70">Anime ({anime.type})</h3>
-                          <h3 className="opacity-70">{anime.status}</h3>
-                          <h3 className="">
-                            Genre:{" "}
-                            {anime.genres?.map((genre, index) => {
-                              return (
-                                <>
-                                  {genre.name}
-                                  {index !== anime.genres.length - 1 && ", "}
-                                </>
-                              );
-                            })}
-                          </h3>
+                          <Link href={`/anime/${anime.mal_id}`}>
+                            <h2 className="text-lg hover:text-white transition-all duration-300">
+                              {anime.title}{" "}
+                              {anime.year ? `(${anime.year})` : ""}
+                            </h2>
+                            <h3 className="opacity-70">{anime.rating}</h3>
+                            <h3 className="opacity-70">Anime ({anime.type})</h3>
+                            <h3 className="opacity-70">{anime.status}</h3>
+                            <h3 className="">
+                              Genre:{" "}
+                              {anime.genres?.map((genre, index) => {
+                                return (
+                                  <>
+                                    {genre.name}
+                                    {index !== anime.genres.length - 1 && ", "}
+                                  </>
+                                );
+                              })}
+                            </h3>
+                          </Link>
                         </td>
                       </tr>
                     );
@@ -107,31 +126,33 @@ const Page = ({ params: { keyword } }) => {
                         className="border-b-1 border-b-slate-200/50"
                       >
                         <th className="px-4 py-2 content-center w-32 md:w-36 text-center">
-                          <Image
-                            src={manga.images.webp.image_url}
-                            width={350}
-                            height={350}
-                            alt={`poster of ${manga.title}`}
-                            className="w-full"
-                          />
+                          <Link href={`/manga/${manga.mal_id}`}>
+                            <Image
+                              src={manga.images.webp.image_url}
+                              width={350}
+                              height={350}
+                              alt={`poster of ${manga.title}`}
+                              className="w-full hover:scale-105 transition-all duration-300"
+                            />
+                          </Link>
                         </th>
                         <td className="px-4 py-2">
-                          <h2 className="text-lg">
-                            {manga.title}
-                          </h2>
-                          <h3 className="opacity-70">{manga.type}</h3>
-                          <h3 className="opacity-70">{manga.status}</h3>
-                          <h3 className="">
-                            Genre:{" "}
-                            {manga.genres?.map((genre, index) => {
-                              return (
-                                <>
-                                  {genre.name}
-                                  {index !== manga.genres.length - 1 && ", "}
-                                </>
-                              );
-                            })}
-                          </h3>
+                          <Link href={`/manga/${manga.mal_id}`}>
+                            <h2 className="text-lg hover:text-white transition-all duration-300">{manga.title}</h2>
+                            <h3 className="opacity-70">{manga.type}</h3>
+                            <h3 className="opacity-70">{manga.status}</h3>
+                            <h3 className="">
+                              Genre:{" "}
+                              {manga.genres?.map((genre, index) => {
+                                return (
+                                  <>
+                                    {genre.name}
+                                    {index !== manga.genres.length - 1 && ", "}
+                                  </>
+                                );
+                              })}
+                            </h3>
+                          </Link>
                         </td>
                       </tr>
                     );
@@ -143,20 +164,24 @@ const Page = ({ params: { keyword } }) => {
                         className="border-b-1 border-b-slate-200/50"
                       >
                         <th className="px-4 py-2 content-center w-32 md:w-36 text-center">
-                          <Image
-                            src={chara.images.webp.image_url}
-                            width={350}
-                            height={350}
-                            alt={`poster of ${chara.name}`}
-                            className="w-full"
-                          />
+                          <Link href={`/character/${chara.mal_id}`}>
+                            <Image
+                              src={chara.images.webp.image_url}
+                              width={350}
+                              height={350}
+                              alt={`poster of ${chara.name}`}
+                              className="w-full hover:scale-105 transition-all duration-300"
+                            />
+                          </Link>
                         </th>
                         <td className="px-4 py-2">
-                          <h2 className="text-lg">
-                            {chara.name}{" "}
-                            {chara.name_kanji ? `(${chara.name_kanji})` : ""}
-                          </h2>
-                          <h3 className="opacity-70">Character</h3>
+                          <Link href={`/character/${chara.mal_id}`}>
+                            <h2 className="text-lg hover:text-white transition-all duration-300">
+                              {chara.name}{" "}
+                              {chara.name_kanji ? `(${chara.name_kanji})` : ""}
+                            </h2>
+                            <h3 className="opacity-70">Character</h3>
+                          </Link>
                         </td>
                       </tr>
                     );

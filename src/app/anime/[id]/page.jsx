@@ -223,7 +223,7 @@ const Page = ({ params: { id } }) => {
                     ) : (
                       <tr>
                         <td colSpan="3" className="px-2 py-4 text-center">
-                          Not yet aired
+                          No data
                         </td>
                       </tr>
                     )}
