@@ -6,9 +6,11 @@ import VideoPlayer from "@/components/Utilites/VideoPlayer";
 import { Bookmark, Play } from "@phosphor-icons/react";
 import Link from "next/link";
 import Image from "next/image";
+import Cookies from "js-cookie";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Page = ({ params: { id } }) => {
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [anime, setAnime] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [characters, setCharacters] = useState([]);
@@ -44,6 +46,33 @@ const Page = ({ params: { id } }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const watchlist = Cookies.getJSON("watchlist") || [];
+
+    // Check if watchlist is an array before using the some method
+    const isInWatchlist =
+      Array.isArray(watchlist) && watchlist.some((item) => item.id === id);
+
+    setIsInWatchlist(isInWatchlist);
+  }, [id]);
+
+  const handleAddToWatchlist = () => {
+    const existingWatchlist = Cookies.getJSON("watchlist") || [];
+
+    const isInWatchlist =
+      Array.isArray(existingWatchlist) &&
+      existingWatchlist.some((item) => item.id === id);
+
+    if (!isInWatchlist) {
+      const updatedWatchlist = [
+        ...existingWatchlist,
+        { id, title: anime.data?.title },
+      ];
+      Cookies.set("watchlist", updatedWatchlist, { expires: 365 });
+      setIsInWatchlist(true);
+    }
+  };
 
   return (
     <div
@@ -86,9 +115,12 @@ const Page = ({ params: { id } }) => {
                 : "No"}{" "}
               reviews
             </h2>
-            <button className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold">
+            <button
+              onClick={handleAddToWatchlist}
+              className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold"
+            >
               <Bookmark size={24} color="#fde68a" />
-              add to watchlist
+              {isInWatchlist ? "Added to Watchlist" : "Add to Watchlist"}
             </button>
             <h2 className="pt-8 pb-3 border-b-1 border-b-slate-200/50">
               Synopsis

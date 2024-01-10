@@ -9,14 +9,26 @@
 }
 
 .loading {
+  position: relative;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #fcd34d 94%, #0000) top/8px 8px
-      no-repeat,
-    conic-gradient(#0000 30%, #fcd34d);
+  background: radial-gradient(farthest-side, #fcd34d 94%, #0000) top/8px 8px no-repeat,
+              conic-gradient(#0000 30%, #fcd34d);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
   animation: s3 1s infinite linear;
+  overflow: hidden; /* Clip the glow inside the spinner */
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  top: -10px; /* Adjust the position to ensure the glow extends beyond the spinner */
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: inherit;
+  box-shadow: 0 0 20px 10px #fcd34d, 0 0 40px 20px rgba(0, 0, 0, 0.4); /* More intense glow effect */
 }
 
 @keyframes s3 {
@@ -24,6 +36,8 @@
     transform: rotate(1turn);
   }
 }
+
+
 
 ::-webkit-scrollbar {
   width: 15px;

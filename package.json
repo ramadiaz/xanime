@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@phosphor-icons/react": "^2.0.15",
+    "js-cookie": "^2.2.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
