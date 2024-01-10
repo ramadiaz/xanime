@@ -2,7 +2,8 @@
 
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import Loading from "@/app/loading";
-import { HeartStraight } from "@phosphor-icons/react";
+import { Disclosure } from "@headlessui/react";
+import { CaretDown, HeartStraight } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -64,6 +65,18 @@ const Page = ({ params: { id } }) => {
                     Add to favorite
                   </h3>
                 </button>
+                <Disclosure>
+                  <Disclosure.Button className="bg-zinc-800 py-2 px-4 flex flex-row justify-between items-center">
+                    <h3>Voice actors</h3>
+                    <CaretDown size={26} color="#e2e8f0" weight="bold" />
+                  </Disclosure.Button>
+                  {character.data?.voices.map((voice) => {
+                    return (
+                      <Disclosure.Panel className="text-sm">{voice.person.name} ({voice.language})</Disclosure.Panel>
+                    )
+                  })}
+
+                </Disclosure>
               </div>
               <div className="basis-3/4 pl-4 flex flex-col gap-4 divide-y-1">
                 <div className="flex flex-col gap-2">

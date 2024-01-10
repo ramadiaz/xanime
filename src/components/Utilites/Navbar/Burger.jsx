@@ -34,8 +34,8 @@ const Burger = () => {
           <ul className="flex flex-col text-slate-200">
             <li className='pl-4 py-2 uppercase text-xs font-bold text-slate-200/80'>Discover</li>
             <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top Anime</Link>
-            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
             <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top Manga</Link>
+            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
           </ul>
         </div>
       ) : (
@@ -43,8 +43,8 @@ const Burger = () => {
           <ul className="flex flex-col text-slate-200">
             <li className='pl-4 py-2 uppercase text-xs font-bold text-slate-200/80'>Discover</li>
             <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top Anime</Link>
-            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
             <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top Manga</Link>
+            <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top Character</Link>
           </ul>
         </div>
       )}
