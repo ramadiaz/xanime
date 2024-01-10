@@ -17,6 +17,9 @@ module.exports = {
       height: {
         '120': '40rem'
       },
+      maxHeight: {
+        '120': '40rem'
+      },
       width: {
         '120': '40rem',
         '140': '50rem'

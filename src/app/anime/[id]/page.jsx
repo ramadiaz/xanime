@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import VideoPlayer from "@/components/Utilites/VideoPlayer";
 import { Bookmark, Play } from "@phosphor-icons/react";
@@ -172,7 +172,7 @@ const Page = ({ params: { id } }) => {
               <h2 className="text-2xl border-b-1 border-b-slate-200/50 pb-2">
                 Episodes
               </h2>
-              <div className="relative mt-2 mx-auto h-120 overflow-y-auto">
+              <div className="relative mt-2 mx-auto max-h-120 overflow-y-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase dark:bg-zinc-800 dark:text-gray-400 sticky top-0">
                     <tr className="">
@@ -262,11 +262,62 @@ const Page = ({ params: { id } }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 mt-10">
-          <h2 className="text-2xl text-white">Recommendations</h2>
-          <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:gap-8 md:gap-10 gap-4">
-            {recommendations.data?.map((recommendation, index) => {
-              return (
+        <div className="text-slate-200">
+          <h2 className="text-2xl text-white">More information</h2>
+          <div className="flex flex-row w-full divide-x-1 divide-slate-200/50 gap-4 pt-2">
+            <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-sm">
+              <li className="w-full flex flex-row justify-between py-2">
+                <span>Rank</span>
+                <span className="opacity-70">
+                  #{" "}
+                  {anime.data?.rank
+                    ? anime.data.rank.toLocaleString()
+                    : "Unknown"}
+                </span>
+              </li>
+              <li className="w-full flex flex-row justify-between py-2">
+                <span>Popularity</span>
+                <span className="opacity-70">
+                  {anime.data?.popularity
+                    ? anime.data.popularity.toLocaleString()
+                    : "Unknown"}
+                </span>
+              </li>
+              <li className="w-full flex flex-row justify-between py-2">
+                <span>Members</span>
+                <span className="opacity-70">
+                  {anime.data?.members
+                    ? anime.data.members.toLocaleString()
+                    : "Unknown"}
+                </span>
+              </li>
+              <li className="w-full flex flex-row justify-between py-2">
+                <span>Favorites</span>
+                <span className="opacity-70">
+                  {anime.data?.favorites
+                    ? anime.data.favorites.toLocaleString()
+                    : "Unknown"}
+                </span>
+              </li>
+            </ul>
+            <div className="basis-3/5 space-y-3 pl-4">
+              <h2 className="border-b-1 border-b-slate-200 pb-3">Background</h2>
+              <h3 className="text-sm">
+                <span className="opacity-70">
+                  {anime.data?.background
+                    ? anime.data.background
+                    : "No information"}
+                </span>
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        {recommendations.data > 0 && (
+          <div className="flex flex-col gap-5 mt-10">
+            <h2 className="text-2xl text-white">Recommendations</h2>
+            <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:gap-8 md:gap-10 gap-4">
+              {recommendations.data.map((recommendation, index) => (
                 <Link
                   href={`/anime/${recommendation.entry.mal_id}`}
                   className="py-3"
@@ -277,16 +328,17 @@ const Page = ({ params: { id } }) => {
                     alt={recommendation.entry.title}
                     width={350}
                     height={350}
+                    loader={lazy}
                     className="w-full h-64 object-cover hover:scale-105 transition-all duration-300"
                   />
                   <h2 className="pt-4 hover:text-slate-200/90">
                     {recommendation.entry.title}
                   </h2>
                 </Link>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

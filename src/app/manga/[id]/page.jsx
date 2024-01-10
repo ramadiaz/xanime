@@ -64,6 +64,14 @@ const Page = ({ params: { id } }) => {
                     {manga.data.title} ({manga.data.title_japanese})
                   </h1>
                   <h2 className="text-slate-200/70">{manga.data.type}</h2>
+                  <h2 className="pt-2">
+                    ⭐ {manga.data?.score ? manga.data?.score : "Not yet aired"}{" "}
+                    |{" "}
+                    {manga.data?.scored_by
+                      ? manga.data?.scored_by.toLocaleString()
+                      : "No"}{" "}
+                    reviews
+                  </h2>
                 </div>
                 <div>
                   <h2 className="pt-8 pb-3 border-b-1 border-b-slate-200">
@@ -82,14 +90,62 @@ const Page = ({ params: { id } }) => {
                       ))}
                   </div>
                 </div>
-                <div>
-                  <h2 className="pb-3 border-b-1 border-b-slate-200">
+              </div>
+            </div>
+
+            <div className="text-slate-200">
+              <h2 className="text-2xl text-white">More information</h2>
+              <div className="flex flex-row w-full divide-x-1 divide-slate-200/50 gap-4 pt-2">
+                <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-sm">
+                  <li className="w-full flex flex-row justify-between py-2">
+                    <span>Rank</span>
+                    <span className="opacity-70">
+                      #{" "}
+                      {manga.data?.rank
+                        ? manga.data.rank.toLocaleString()
+                        : "Unknown"}
+                    </span>
+                  </li>
+                  <li className="w-full flex flex-row justify-between py-2">
+                    <span>Popularity</span>
+                    <span className="opacity-70">
+                      {manga.data?.popularity
+                        ? manga.data.popularity.toLocaleString()
+                        : "Unknown"}
+                    </span>
+                  </li>
+                  <li className="w-full flex flex-row justify-between py-2">
+                    <span>Members</span>
+                    <span className="opacity-70">
+                      {manga.data?.members
+                        ? manga.data.members.toLocaleString()
+                        : "Unknown"}
+                    </span>
+                  </li>
+                  <li className="w-full flex flex-row justify-between py-2">
+                    <span>Favorites</span>
+                    <span className="opacity-70">
+                      {manga.data?.favorites
+                        ? manga.data.favorites.toLocaleString()
+                        : "Unknown"}
+                    </span>
+                  </li>
+                </ul>
+                <div className="basis-3/5 space-y-3 pl-4">
+                  <h2 className="border-b-1 border-b-slate-200 pb-3">
                     Background
                   </h2>
-                  <h2 className="py-3 text-sm">{manga.data?.synopsis}</h2>
+                  <h3 className="text-sm">
+                    <span className="opacity-85">
+                      {manga.data?.background
+                        ? manga.data.background
+                        : "No information"}
+                    </span>
+                  </h3>
                 </div>
               </div>
             </div>
+
             <div>
               <h2 className="text-2xl text-white">Relations.</h2>
               <div className="overflow-y-auto max-h-96 mt-4">
@@ -127,12 +183,9 @@ const Page = ({ params: { id } }) => {
                             </th>
                             <td className="px-6 py-4">{relation.relation}</td>
                             <td className="px-6 py-4">
-                                <Link 
-                                    href={`/${child.type}/${child.mal_id}`}
-                                >
+                              <Link href={`/${child.type}/${child.mal_id}`}>
                                 {child.name}
-                                </Link>
-                            
+                              </Link>
                             </td>
                             <td className="px-6 py-4 uppercase font-semibold">
                               {child.type}

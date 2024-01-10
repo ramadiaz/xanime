@@ -19,7 +19,7 @@ const Page = ({ params: { keyword } }) => {
       const mangaResultAPI = await getAnimeResponse("manga", `q=${keyword}`);
       const charaResultAPI = await getAnimeResponse(
         "characters",
-        `q=${keyword}&limit=10`
+        `q=${keyword}`
       );
 
       setAnimeResult(animeResultAPI);
