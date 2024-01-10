@@ -7,14 +7,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Page = () => {
-  const [topCharacter, setTopCharacter] = useState([]);
+  const [topManga, setTopManga] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    const topCharacterAPI = await getAnimeResponse(`top/characters`, 'limit=20');
-    setTopCharacter(topCharacterAPI);
-
-    setIsLoading(false);
+    try {
+      const topMangaAPI = await getAnimeResponse("top/manga");
+      setTopManga(topMangaAPI);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="topCharacters">
+    <div className="topManga">
       {isLoading ? (
         <Loading />
       ) : (
@@ -30,7 +33,7 @@ const Page = () => {
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto">
             <div className="py-12">
               <h1 className="text-2xl text-slate-200 font-bold">
-                TOP 20 CHARACTERS
+                TOP 20 ANIME
               </h1>
               <h2 className="text-slate-200/70">Based on My Anime List</h2>
             </div>
@@ -47,15 +50,15 @@ const Page = () => {
                     scope="col"
                     className="px-2 py-3 text-center border-r border-zinc-700"
                   >
-                    Name
+                    Title
                   </th>
                   <th scope="col" className="px-2 py-3 text-center">
-                    Popularity
+                    Score
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {topCharacter.data?.map((character, index) => {
+                {topManga.data?.map((manga, index) => {
                   return (
                     <tr className="bg- border-b dark:border-gray-700">
                       <th
@@ -66,40 +69,36 @@ const Page = () => {
                       </th>
                       <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
                         <Link
-                          href={`/character/${character.mal_id}`}
+                          href={`/manga/${manga.mal_id}`}
                           key={index}
                           className=""
                         >
-                          <div className="md:w-28 md:h-40 w-12 h-20 relative">
+                          <div className="w-20 h-40 md:w-28 md:h-40 relative">
                             <Image
-                              src={character.images.webp.image_url}
-                              alt={character.name}
+                              src={manga.images.webp.image_url}
+                              alt={manga.title}
                               layout="fill"
+                              objectFit="cover"
+                              className=""
                             />
                           </div>
                         </Link>
                         <div className="flex flex-col">
-                          <Link href={`/character/${character.mal_id}`} key={index}>
+                          <Link href={`/manga/${manga.mal_id}`} key={index}>
                             <h3 className="text-base text-bold text-slate-200 hover:text-slate-50 transition-all">
-                              {character.name}
+                              {manga.title}
+                              {manga.title_japanese && (
+                                <> ({manga.title_japanese})</>
+                              )}
                             </h3>
-                            <h3>{character.name_kanji}</h3>
-                            <h3 className="">
-                              
-                              {character.nicknames?.map((nickname, index) => {
-                                return (
-                                  <>
-                                    {nickname}
-                                    {index !== character.nicknames.length - 1 && ", "}
-                                  </>
-                                );
-                              })}
-                              </h3>
-                          </Link>      
+                          </Link>
+                          <h3>{manga.rating}</h3>
+                          <h3>Genre: {manga.genres[0]?.name}</h3>
+                          <h3>{manga.scored_by.toLocaleString()} votes</h3>
                         </div>
                       </td>
-                      <td className="px-2 py-4 text-center whitespace-nowrap text-slate-200">
-                        🩷 {character.favorites.toLocaleString()}
+                      <td className="px-2 py-4 text-center whitespace-nowrap">
+                        ⭐ {manga.score}
                       </td>
                     </tr>
                   );

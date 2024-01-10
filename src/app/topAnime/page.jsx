@@ -67,20 +67,19 @@ const Page = () => {
                       #{index + 1}
                     </th>
                     <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
-                      <Link href={`/anime/${anime.mal_id}`} key={index}>
-                        <Image
-                          src={anime.images.webp.image_url}
-                          alt={anime.title}
-                          width={350}
-                          height={350}
-                          className="md:w-28 md:h-40 w-12 h-20 object-cover"
-                        />
+                      <Link href={`/anime/${anime.mal_id}`} key={index} className="">
+                        <div className="md:w-28 md:h-40 w-12 h-20 relative">
+                          <Image
+                            src={anime.images.webp.image_url}
+                            alt={anime.title}
+                            layout="fill"
+                          />
+                        </div>
                       </Link>
                       <div className="flex flex-col">
                         <Link href={`/anime/${anime.mal_id}`} key={index}>
                           <h3 className="text-base text-bold text-slate-200 hover:text-slate-50 transition-all">
-                            {anime.title}(
-                            {anime.year ? anime.year : "Unknown release year"})
+                            {anime.title}
                           </h3>
                         </Link>
                         <h3>{anime.rating}</h3>
