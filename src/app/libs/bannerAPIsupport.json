@@ -1,0 +1,35 @@
+{
+    "banner": [
+        {
+            "malID": 14741,
+            "title": "Chuunibyou demo Koi ga Shitai!",
+            "genre": "Comedy, Romance",
+            "rating": "PG-13 (Teens 13 or older)",
+            "score": 7.71,
+            "release": "Fall 2012",
+            "image": "https://drive.google.com/uc?id=10gn6fILRy6TOi_GH7f1jZYI-7AknfNKi",
+            "logo": "https://drive.google.com/uc?export=view&id=1Ua1PtxBZaJUowf24HXMCqqybBsDFf31h"
+        },
+        {
+            "malID": 339,
+            "title": "Serial Experiments Lain",
+            "genre": "Mystery, Drama, Supernatural",
+            "rating": "R - 17+ (violence & profanity)",
+            "score": 8.09,
+            "release": "Summer 1998",
+            "image": "https://drive.google.com/uc?id=1uP_om3d-7RvR7LIg_gdxF0IOxZ_R9Czu",
+            "logo": "https://drive.google.com/uc?export=view&id=1NiYOxxtYwKtGxzRyXkc4Wmg8d0FS3wD2"
+            
+        },
+        {
+            "malID": 11111,
+            "title": "Another",
+            "genre": "Gore, School",
+            "rating": "R - 17+ (violence & profanity)",
+            "score": 7.47,
+            "release": "Winter 2012",
+            "image": "https://drive.google.com/uc?id=1YDwAycqLSCMZFgcReMxKXpsisO8eEJHC",
+            "logo": "https://drive.google.com/uc?export=view&id=1j6BoRtClANk9Q0KYb-mfoWM6wDm0bNPx"
+        }
+    ]
+}

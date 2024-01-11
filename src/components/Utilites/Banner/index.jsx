@@ -10,9 +10,9 @@ const Banner = () => {
   const [bannerAPI, setBannerAPI] = useState({});
 
   const bannerImages = [
-    "banner_another.png",
-    "banner_lain.png",
     "banner_rikka.png",
+    "banner_lain.png",
+    "banner_another.png",
   ];
 
   useEffect(() => {
