@@ -3,13 +3,22 @@
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import Loading from "@/app/loading";
 import { Bookmark } from "@phosphor-icons/react";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Page = ({ params: { id } }) => {
+  const [isInBookmark, setIsInBookmark] = useState(false);
   const [manga, setManga] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -25,6 +34,40 @@ const Page = ({ params: { id } }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const bookmark = Cookies.getJSON("bookmark");
+
+    const isInBookmark =
+      Array.isArray(bookmark) && bookmark.some((item) => item.id === id);
+
+    setIsInBookmark(isInBookmark);
+  }, [id]);
+
+  const handleAddBookmark = () => {
+    const existingBookmark = Cookies.getJSON("bookmark") || [];
+
+    const isInBookmark =
+      Array.isArray(existingBookmark) &&
+      existingBookmark.some((item) => item.id === id);
+
+    if (!isInBookmark) {
+      const updateBookmark = [
+        ...existingBookmark,
+        { id, title: manga.data?.title },
+      ];
+      Cookies.set("bookmark", updateBookmark);
+      setIsInBookmark(true);
+    }
+  };
+
+  const removeBookmark = () => {
+    const existingBookmark = Cookies.getJSON("bookmark") || [];
+
+    const updateBookmark = existingBookmark.filter((item) => item.id !== id);
+    Cookies.set("bookmark", updateBookmark);
+    setIsInBookmark(false);
+  };
 
   let counter = 0;
 
@@ -53,9 +96,20 @@ const Page = ({ params: { id } }) => {
                   height={350}
                   alt={`poster of ${manga.data?.title}`}
                 />
-                <button className="flex flex-row gap-2 border-2 border-amber-200 hover:bg-amber-200/50 transition-all duration-300 p-2 items-center justify-center uppercase font-bold">
-                  <Bookmark size={24} color="#fde68a" />
-                  bookmark
+                <button
+                  onClick={isInBookmark ? removeBookmark : handleAddBookmark}
+                >
+                  {isInBookmark ? (
+                    <div className="flex flex-row gap-2 border-2 border-amber-400 bg-amber-400 hover:bg-amber-400/75 hover:border-amber-400/75 transition-all duration-300 p-2 items-center justify-center uppercase font-bold text-zinc-950">
+                      <Bookmark size={24} color="#09090b" weight="fill" />
+                      Added to bookmark
+                    </div>
+                  ) : (
+                    <div className="flex flex-row gap-2 border-2 border-amber-200 hover:bg-amber-200/50 transition-all duration-300 p-2 items-center justify-center uppercase font-bold">
+                      <Bookmark size={24} color="#fde68a" />
+                      bookmark
+                    </div>
+                  )}
                 </button>
               </div>
               <div className="basis-3/4 pl-4">

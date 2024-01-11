@@ -4,11 +4,13 @@ import { getAnimeResponse } from "@/app/libs/api-libs";
 import Loading from "@/app/loading";
 import { Disclosure } from "@headlessui/react";
 import { CaretDown, HeartStraight } from "@phosphor-icons/react";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Page = ({ params: { id } }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const [character, setCharacter] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +34,37 @@ const Page = ({ params: { id } }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const favorite = Cookies.getJSON("favorite") || [];
+
+    const isFavorite =
+      Array.isArray(favorite) && favorite.some((item) => item.id === id);
+    setIsFavorite(isFavorite);
+  }, [id]);
+
+  const handleAddFavorite = () => {
+    const existingFavorite = Cookies.getJSON("favorite") || [];
+    const isFavorite =
+      Array.isArray(existingFavorite) && existingFavorite.some((item) => item.id === id);
+
+    if (!isFavorite) {
+      const updateFavorite = [
+        ...existingFavorite,
+        { id, name: character.data?.name },
+      ];
+      Cookies.set("favorite", updateFavorite);
+      setIsFavorite(true);
+    }
+  };
+
+  const removeFavorite = () => {
+    const existingFavorite = Cookies.getJSON("favorite") || [];
+
+    const updateFavorite = existingFavorite.filter((item) => item.id !== id);
+    Cookies.set("favorite", updateFavorite);
+    setIsFavorite(false);
+  };
 
   const aboutLines = character.data?.about.split("\n");
 
@@ -59,11 +92,26 @@ const Page = ({ params: { id } }) => {
                   alt={`image of ${character.data?.name}`}
                   className="w-full h-fit object-cover"
                 />
-                <button className="flex flex-row gap-2 border-2 border-pink-800 hover:bg-pink-800/50 transition-all duration-300 p-2 items-center justify-center">
-                  <HeartStraight size={24} color="#d05353" weight="bold" />
-                  <h3 className="uppercase font-semibold text-sm">
-                    Add to favorite
-                  </h3>
+                <button
+                  onClick={isFavorite ? removeFavorite : handleAddFavorite}
+                >
+                  {isFavorite ? (
+                    <div className="flex flex-row gap-2 border-2 border-pink-800 hover:bg-pink-800/80 hover:border-pink-800/80 bg-pink-800 transition-all duration-300 p-2 items-center justify-center">
+
+                      <HeartStraight size={24} color="#09090b" weight="fill" />
+                      <h3 className="uppercase font-semibold text-sm text-zinc-950">
+                        remove favorite
+                      </h3>
+
+                    </div>
+                  ) : (
+                    <div className="flex flex-row gap-2 border-2 border-pink-800 hover:bg-pink-800/50 transition-all duration-300 p-2 items-center justify-center">
+                      <HeartStraight size={24} color="#d05353" weight="bold" />
+                      <h3 className="uppercase font-semibold text-sm">
+                        Add to favorite
+                      </h3>
+                    </div>
+                  )}
                 </button>
                 <Disclosure>
                   <Disclosure.Button className="bg-zinc-800 py-2 px-4 flex flex-row justify-between items-center">
@@ -72,10 +120,11 @@ const Page = ({ params: { id } }) => {
                   </Disclosure.Button>
                   {character.data?.voices.map((voice) => {
                     return (
-                      <Disclosure.Panel className="text-sm">{voice.person.name} ({voice.language})</Disclosure.Panel>
-                    )
+                      <Disclosure.Panel className="text-sm">
+                        {voice.person.name} ({voice.language})
+                      </Disclosure.Panel>
+                    );
                   })}
-
                 </Disclosure>
               </div>
               <div className="basis-3/4 pl-4 flex flex-col gap-4 divide-y-1">

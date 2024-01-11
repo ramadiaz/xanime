@@ -50,7 +50,6 @@ const Page = ({ params: { id } }) => {
   useEffect(() => {
     const watchlist = Cookies.getJSON("watchlist") || [];
 
-    // Check if watchlist is an array before using the some method
     const isInWatchlist =
       Array.isArray(watchlist) && watchlist.some((item) => item.id === id);
 
@@ -69,9 +68,17 @@ const Page = ({ params: { id } }) => {
         ...existingWatchlist,
         { id, title: anime.data?.title },
       ];
-      Cookies.set("watchlist", updatedWatchlist, { expires: 365 });
+      Cookies.set("watchlist", updatedWatchlist);
       setIsInWatchlist(true);
     }
+  };
+
+  const removeWatchlist = () => {
+    const existingWatchlist = Cookies.getJSON("watchlist") || [];
+
+    const updatedWatchlist = existingWatchlist.filter((item) => item.id !== id);
+    Cookies.set("watchlist", updatedWatchlist);
+    setIsInWatchlist(false);
   };
 
   return (
@@ -116,11 +123,20 @@ const Page = ({ params: { id } }) => {
               reviews
             </h2>
             <button
-              onClick={handleAddToWatchlist}
-              className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold"
-            >
-              <Bookmark size={24} color="#fde68a" />
-              {isInWatchlist ? "Added to Watchlist" : "Add to Watchlist"}
+              onClick={isInWatchlist ? removeWatchlist : handleAddToWatchlist}
+              
+            > 
+            {isInWatchlist ? (
+              <div className="p-3 hover:bg-amber-400/75 hover:border-amber-400/75 transition-all border border-amber-400 flex flex-row gap-4 uppercase font-bold bg-amber-400">
+                <Bookmark size={24} color="#09090b" weight="fill"/>
+                <h3 className="text-zinc-950">Added to watchlist</h3>
+              </div>
+            ) : (
+              <div className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold">
+                <Bookmark size={24} color="#fde68a"/>
+                Add to Watchlist
+              </div>
+            )}
             </button>
             <h2 className="pt-8 pb-3 border-b-1 border-b-slate-200/50">
               Synopsis
