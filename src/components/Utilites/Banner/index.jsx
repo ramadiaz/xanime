@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { getBannerResponse } from "@/app/libs/api-libs";
@@ -6,44 +6,52 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Banner = () => {
- const [currentIndex, setCurrentIndex] = useState(0);
- const [bannerAPI, setBannerAPI] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [bannerAPI, setBannerAPI] = useState({});
 
- useEffect(() => {
+  const bannerImages = [
+    "banner_another.png",
+    "banner_lain.png",
+    "banner_rikka.png",
+  ];
+
+  useEffect(() => {
     const getBannerData = async () => {
       const data = await getBannerResponse();
       setBannerAPI(data);
     };
 
     getBannerData();
- }, []);
+  }, []);
 
- useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % 3);
     }, 5000);
 
     return () => clearInterval(interval);
- }, [currentIndex]);
+  }, [currentIndex]);
 
- const handlePrev = () => {
-  if (bannerAPI.banner) {
+  const handlePrev = () => {
+    if (bannerAPI.banner) {
       setCurrentIndex((currentIndex - 1 + bannerAPI.banner.length) % 3);
-  }
-};
+    }
+  };
 
-const handleNext = () => {
-  if (bannerAPI.banner) {
+  const handleNext = () => {
+    if (bannerAPI.banner) {
       setCurrentIndex((currentIndex + 1) % 3);
-  }
-};
+    }
+  };
 
- return (
+  return (
     <div>
       {bannerAPI.banner && (
         <div
           className="relative w-full h-40 md:h-96 lg:h-120 bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
-          style={{ backgroundImage: `url(${bannerAPI.banner[currentIndex].image})` }}
+          style={{
+            backgroundImage: `url(/banner/${bannerImages[currentIndex]})`,
+          }}
         >
           <button
             className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-40"
@@ -84,23 +92,33 @@ const handleNext = () => {
             </svg>
           </button>
           <div className="absolute left-10 md:left-16 lg:left-24 transition-all duration-500 ease-in-out top-1/3 md:top-1/2">
-            <Link href={bannerAPI.banner && bannerAPI.banner[currentIndex] ? `/anime/${bannerAPI.banner[currentIndex].malID}` : '#'}>
-            <Image
-              src={bannerAPI.banner[currentIndex].logo}
-              alt={bannerAPI.banner[currentIndex].title}
-              width={300}
-              height={180}
-              loading="lazy"
-              className="w-max h-10 md:h-20 lg:h-32 hover:scale-105 transition-all duration-300"
+            <Link
+              href={
+                bannerAPI.banner && bannerAPI.banner[currentIndex]
+                  ? `/anime/${bannerAPI.banner[currentIndex].malID}`
+                  : "#"
+              }
+            >
+              <Image
+                src={bannerAPI.banner[currentIndex].logo}
+                alt={bannerAPI.banner[currentIndex].title}
+                width={300}
+                height={180}
+                loading="lazy"
+                className="w-max h-10 md:h-20 lg:h-32 hover:scale-105 transition-all duration-300"
               />
-              </Link>
-            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">Genres | {bannerAPI.banner[currentIndex].genre}</h2>
-            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">{bannerAPI.banner[currentIndex].rating}</h2>
+            </Link>
+            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">
+              Genres | {bannerAPI.banner[currentIndex].genre}
+            </h2>
+            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">
+              {bannerAPI.banner[currentIndex].rating}
+            </h2>
           </div>
         </div>
       )}
     </div>
- );
+  );
 };
 
 export default Banner;

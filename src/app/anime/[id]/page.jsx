@@ -116,7 +116,7 @@ const Page = ({ params: { id } }) => {
               {anime.data?.rating ? anime.data?.rating : "Unknown age rating"}
             </h2>
             <h2 className="pt-7 pb-4">
-              ⭐ {anime.data?.score ? anime.data?.score : "Not yet aired"} |{" "}
+              ⭐ {anime.data?.score ? anime.data?.score : "Unscored"} |{" "}
               {anime.data?.scored_by
                 ? anime.data?.scored_by.toLocaleString()
                 : "No"}{" "}

@@ -2,12 +2,12 @@
 
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import Loading from "@/app/loading";
-import { Disclosure } from "@headlessui/react";
-import { CaretDown, HeartStraight } from "@phosphor-icons/react";
+import { Disclosure, Transition } from "@headlessui/react";
+import { CaretDown, CaretUp, HeartStraight } from "@phosphor-icons/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 const Page = ({ params: { id } }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -46,7 +46,8 @@ const Page = ({ params: { id } }) => {
   const handleAddFavorite = () => {
     const existingFavorite = Cookies.getJSON("favorite") || [];
     const isFavorite =
-      Array.isArray(existingFavorite) && existingFavorite.some((item) => item.id === id);
+      Array.isArray(existingFavorite) &&
+      existingFavorite.some((item) => item.id === id);
 
     if (!isFavorite) {
       const updateFavorite = [
@@ -97,12 +98,10 @@ const Page = ({ params: { id } }) => {
                 >
                   {isFavorite ? (
                     <div className="flex flex-row gap-2 border-2 border-pink-800 hover:bg-pink-800/80 hover:border-pink-800/80 bg-pink-800 transition-all duration-300 p-2 items-center justify-center">
-
                       <HeartStraight size={24} color="#09090b" weight="fill" />
                       <h3 className="uppercase font-semibold text-sm text-zinc-950">
                         remove favorite
                       </h3>
-
                     </div>
                   ) : (
                     <div className="flex flex-row gap-2 border-2 border-pink-800 hover:bg-pink-800/50 transition-all duration-300 p-2 items-center justify-center">
@@ -114,17 +113,43 @@ const Page = ({ params: { id } }) => {
                   )}
                 </button>
                 <Disclosure>
-                  <Disclosure.Button className="bg-zinc-800 py-2 px-4 flex flex-row justify-between items-center">
-                    <h3>Voice actors</h3>
-                    <CaretDown size={26} color="#e2e8f0" weight="bold" />
-                  </Disclosure.Button>
-                  {character.data?.voices.map((voice) => {
-                    return (
-                      <Disclosure.Panel className="text-sm">
-                        {voice.person.name} ({voice.language})
-                      </Disclosure.Panel>
-                    );
-                  })}
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className="bg-zinc-800 py-2 px-4 flex flex-row justify-between items-center">
+                        <h3>Voice actors</h3>
+
+                        <CaretDown
+                          size={26}
+                          color="#e2e8f0"
+                          weight="bold"
+                          className={`${
+                            open
+                              ? "rotate-180 transform transition-all duration-300"
+                              : "transform transition-all duration-300"
+                          }`}
+                        />
+                      </Disclosure.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 -translate-y-5"
+                        enterTo="transform opacity-100"
+                        leave="transition ease-out duration-100"
+                        leaveFrom="transform opacity-100"
+                        leaveTo="transform opacity-0 -translate-y-5"
+                      >
+                        <div className="space-y-2">
+                          {character.data?.voices.map((voice) => {
+                            return (
+                              <Disclosure.Panel className="text-sm">
+                                {voice.person.name} ({voice.language})
+                              </Disclosure.Panel>
+                            );
+                          })}
+                        </div>
+                      </Transition>
+                    </>
+                  )}
                 </Disclosure>
               </div>
               <div className="basis-3/4 pl-4 flex flex-col gap-4 divide-y-1">
