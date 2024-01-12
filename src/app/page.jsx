@@ -183,7 +183,7 @@ const Home = async () => {
       <section>
         <Header
           title="Need something new? Try this random anime"
-          desc="Promise me that you will try watching it to make it more exciting"
+          desc="Promise me that you will try watch it to make it more exciting"
         />
         <RandomAnime/>
       </section>

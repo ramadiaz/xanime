@@ -78,20 +78,20 @@ const DeveloperRecommendations = () => {
           </h3>
         </div>
         <ul className="flex flex-col gap-4 ml-4 py-4">
-          {recommendations.data.drama.map((dramaItem) => {
+          {recommendations.data.comedy.map((comedyItem) => {
             return (
               <li className="flex flex-row gap-4 items-center">
-                <Link href={`/anime/${dramaItem.mal_id}`} className="w-max">
+                <Link href={`/anime/${comedyItem.mal_id}`} className="w-max">
                   <Image
-                    src={dramaItem.image}
+                    src={comedyItem.image}
                     width={350}
                     height={350}
                     className="w-24 h-40 object-cover"
                   />
                 </Link>
                 <div className="">
-                  <Link href={`/anime/${dramaItem.mal_id}`} className="text-lg">
-                    {dramaItem.title}
+                  <Link href={`/anime/${comedyItem.mal_id}`} className="text-lg">
+                    {comedyItem.title}
                   </Link>
                 </div>
               </li>
