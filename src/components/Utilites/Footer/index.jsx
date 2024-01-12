@@ -8,15 +8,22 @@ const Footer = async () => {
       <div className="max-w-screen-xl pt-16 pb-8 lg:py-8 mx-auto w-11/12 lg:w-2/3">
         <div className="md:flex md:justify-between mx-auto">
           <div className="mb-6 md:mb-0">
-            <a href="https://github.com/ramadiaz" className="flex items-center">
+            <a href="https://github.com/ramadiaz" className="flex items-start">
               <img
                 src={githubRama.avatar_url}
                 className="h-10 me-3 rounded-full"
                 alt={`avatar of ${githubRama.login}`}
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <div className="flex flex-col">
+
+              <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Rama Diaz
               </span>
+              <span className="text-sm whitespace-nowrap dark:text-white/70">
+                {githubRama.bio}
+              </span>
+
+              </div>
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

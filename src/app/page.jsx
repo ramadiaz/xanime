@@ -1,15 +1,15 @@
 import { getAnimeResponse } from "./libs/api-libs";
 import Header from "@/components/Utilites/Header";
 import AnimeList from "@/components/AnimeList";
-import CharacterList from "@/components/CharacterList";
 import Banner from "@/components/Utilites/Banner";
 import Link from "next/link";
 import Image from "next/image";
+import DeveloperRecommendations from "@/components/DeveloperRecommendations";
+import RandomAnime from "@/components/RandomAnime";
 
 const Home = async () => {
   const seasonUpcoming = await getAnimeResponse("seasons/upcoming", "limit=12");
   const topAnime = await getAnimeResponse("top/anime", "limit=10");
-  const topCharacters = await getAnimeResponse("top/characters", "limit=12");
   const topManga = await getAnimeResponse("top/manga", "limit=10")
   const seasonsNow = await getAnimeResponse("seasons/now", "limit=12");
   return (
@@ -174,11 +174,18 @@ const Home = async () => {
 
       <section>
         <Header
-          title="TOP FAVORITE CHARACTER"
-          linkTitle="See all"
-          linkHref="/topCharacter"
+          title="Developer Recommendations"
+          desc="Some anime that I recommend for you are based on my experience of being a `wibu` for 7 years"
         />
-        <CharacterList api={topCharacters} />
+        <DeveloperRecommendations/>
+      </section>
+
+      <section>
+        <Header
+          title="Need something new? Try this random anime"
+          desc="Promise me that you will try watching it to make it more exciting"
+        />
+        <RandomAnime/>
       </section>
     </div>
   );

@@ -1,0 +1,58 @@
+{
+    "data": {
+        "romance":[
+            {
+                "mal_id": 18671,
+                "title": "Chuunibyou demo Koi ga Shitai! Ren",
+                "image": "/devRecommendation/18671.webp",
+                "desc": "unset"
+            },
+            {
+                "mal_id": 21995,
+                "title": "Ao Haru Ride",
+                "image": "/devRecommendation/21995.webp",
+                "desc": "unset"
+            },
+            {
+                "mal_id": 37999,
+                "title": "Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen",
+                "image": "/devRecommendation/37999.webp",
+                "desc":"unset"
+            }
+        ],
+        "drama":[
+            {
+                "mal_id": 2167,
+                "title": "Clannad",
+                "image": "/devRecommendation/2167.webp",
+                "desc": "unset"
+            },
+            {
+                "mal_id": 4181,
+                "title": "Clannad: After Story",
+                "image": "/devRecommendation/4181.webp",
+                "desc": "unset"
+            },
+            {
+                "mal_id": 33352,
+                "title": "Violet Evergarden",
+                "image": "/devRecommendation/33352.webp",
+                "desc": "unset"
+            }
+        ],
+        "comedy":[
+            {
+                "mal_id": 30831,
+                "title": "Kono Subarashii Sekai ni Shukufuku wo!",
+                "image": "/devRecommendation/30831.webp",
+                "desc": "unset"
+            },
+            {
+                "mal_id": 38659,
+                "title": "Shinchou Yuusha: Kono Yuusha ga Ore Tueee Kuse ni Shinchou Sugiru",
+                "image": "/devRecommendation/38659.webp",
+                "desc": "unset"
+            }
+        ]
+    }
+}

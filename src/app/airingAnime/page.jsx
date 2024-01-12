@@ -3,16 +3,16 @@ import { getAnimeResponse } from "../libs/api-libs"
 import Header from "@/components/Utilites/Header"
 
 const Page = async() => {
-    const upcomingAnime = await getAnimeResponse("seasons/upcoming")
+    const airingAnime = await getAnimeResponse("seasons/now")
 
     return (
         <>
-        <Header title="Season Upcoming Anime"
-        desc="Anime that will be released soon"
+        <Header title="Airing Anime"
+        desc="New anime released this season"
         
         />
 
-        <AnimeList api={upcomingAnime}/>
+        <AnimeList api={airingAnime}/>
         </>
     )
 }

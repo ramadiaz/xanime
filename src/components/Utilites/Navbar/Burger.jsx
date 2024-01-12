@@ -36,6 +36,7 @@ const Burger = () => {
             <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Anime</Link>
             <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Manga</Link>
             <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Character</Link>
+            <Link href="/randomAnime" className='pl-4 py-2 hover:bg-zinc-700'>Gacha Random Anime</Link>
           </ul>
         </div>
       ) : (
@@ -45,6 +46,7 @@ const Burger = () => {
             <Link href="/topAnime" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Anime</Link>
             <Link href="/topManga" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Manga</Link>
             <Link href="/topCharacter" className='pl-4 py-2 hover:bg-zinc-700'>Top 20 Character</Link>
+            <Link href="/randomAnime" className='pl-4 py-2 hover:bg-zinc-700'>Gacha Random Anime</Link>
           </ul>
         </div>
       )}
