@@ -56,10 +56,10 @@ const Page = ({ params: { keyword } }) => {
 
   return (
     <div className="bg-zinc-950 text-slate-200">
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto py-14">
-        {isLoading ? (
-          <Loading />
-        ) : (
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto py-14">
           <section>
             <h1 className="text-xl uppercase font-bold">
               <span className="">Search result for </span>
@@ -138,7 +138,9 @@ const Page = ({ params: { keyword } }) => {
                         </th>
                         <td className="px-4 py-2">
                           <Link href={`/manga/${manga.mal_id}`}>
-                            <h2 className="text-lg hover:text-white transition-all duration-300">{manga.title}</h2>
+                            <h2 className="text-lg hover:text-white transition-all duration-300">
+                              {manga.title}
+                            </h2>
                             <h3 className="opacity-70">{manga.type}</h3>
                             <h3 className="opacity-70">{manga.status}</h3>
                             <h3 className="">
@@ -190,8 +192,8 @@ const Page = ({ params: { keyword } }) => {
               </table>
             </div>
           </section>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

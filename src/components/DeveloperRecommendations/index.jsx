@@ -19,7 +19,7 @@ const DeveloperRecommendations = () => {
           {recommendations.data.romance.map((romanceItem) => {
             return (
               <li className="flex flex-row gap-4 items-center">
-                <Link href={`/anime/${romanceItem.mal_id}`} className="w-max">
+                <Link href={`/anime/${romanceItem.mal_id}`} className="w-28">
                   <Image
                     src={romanceItem.image}
                     width={350}
@@ -27,7 +27,7 @@ const DeveloperRecommendations = () => {
                     className="w-24 h-40 object-cover"
                   />
                 </Link>
-                <div className="">
+                <div className="w-full">
                   <Link
                     href={`/anime/${romanceItem.mal_id}`}
                     className="text-lg"
@@ -51,7 +51,7 @@ const DeveloperRecommendations = () => {
           {recommendations.data.drama.map((dramaItem) => {
             return (
               <li className="flex flex-row gap-4 items-center">
-                <Link href={`/anime/${dramaItem.mal_id}`} className="w-max">
+                <Link href={`/anime/${dramaItem.mal_id}`} className="w-28">
                   <Image
                     src={dramaItem.image}
                     width={350}
@@ -59,7 +59,7 @@ const DeveloperRecommendations = () => {
                     className="w-24 h-40 object-cover"
                   />
                 </Link>
-                <div className="">
+                <div className="w-full">
                   <Link href={`/anime/${dramaItem.mal_id}`} className="text-lg">
                     {dramaItem.title}
                   </Link>
@@ -81,7 +81,7 @@ const DeveloperRecommendations = () => {
           {recommendations.data.comedy.map((comedyItem) => {
             return (
               <li className="flex flex-row gap-4 items-center">
-                <Link href={`/anime/${comedyItem.mal_id}`} className="w-max">
+                <Link href={`/anime/${comedyItem.mal_id}`} className="w-28">
                   <Image
                     src={comedyItem.image}
                     width={350}
@@ -89,7 +89,7 @@ const DeveloperRecommendations = () => {
                     className="w-24 h-40 object-cover"
                   />
                 </Link>
-                <div className="">
+                <div className="w-full">
                   <Link href={`/anime/${comedyItem.mal_id}`} className="text-lg">
                     {comedyItem.title}
                   </Link>

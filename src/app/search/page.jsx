@@ -36,10 +36,10 @@ const Page = () => {
 
   return (
     <div className="h-screen bg-zinc-950">
-      <div className="mx-auto w-9/12">
+      <div className="lg:w-2/3 w-11/12 mx-auto">
         <div className="p-8 flex justify-end items-center">
           <input
-            placeholder="Anime name, character name, genre, etc"
+            placeholder="Anime, manga, character, etc"
             className="w-full p-2 rounded"
             onKeyDown={handleKeyDown}
             ref={searchRef}

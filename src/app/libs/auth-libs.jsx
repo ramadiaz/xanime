@@ -5,6 +5,5 @@ import { authOption } from "../api/auth/[...nextauth]/route";
 
 export const authUserSession = async() => {
     const session = await getServerSession(authOption)
-    console.log(session, "ini session")
     return session?.user
 }
