@@ -67,7 +67,7 @@ const Page = ({ params: { id } }) => {
     setIsFavorite(false);
   };
 
-  const aboutLines = character.data?.about.split("\n");
+  const aboutLines = character.data?.about?.split("\n");
 
   return (
     <div className="app">
@@ -162,12 +162,14 @@ const Page = ({ params: { id } }) => {
                   </h3>
                 </div>
                 <h2 className="text-sm py-4">
-                  {aboutLines.map((line, index) => (
+                  {aboutLines? aboutLines.map((line, index) => (
                     <React.Fragment key={index}>
                       {line}
                       {index !== aboutLines.length - 1 && <br />}{" "}
                     </React.Fragment>
-                  ))}
+                  )) : (
+                    "No information"
+                  )}
                 </h2>
               </div>
             </div>
