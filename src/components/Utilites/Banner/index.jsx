@@ -104,7 +104,6 @@ const Banner = () => {
                 alt={bannerAPI.banner[currentIndex].title}
                 width={300}
                 height={180}
-                loading="lazy"
                 className="w-max h-10 md:h-20 lg:h-32 hover:scale-105 transition-all duration-300"
               />
             </Link>
