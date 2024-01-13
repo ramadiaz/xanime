@@ -22,11 +22,6 @@ const Navbar = () => {
               <MagnifyingGlass size={24} color="#fdfcfc" />
             </button>
           </Link>
-          <Link href="../../../bookmark">
-            <button className="p-5 hover:bg-zinc-900 transition-all">
-              <Bookmark size={24} color="#fdfcfc" />
-            </button>
-          </Link>
           <UserMenu/>
         </div>
       </div>

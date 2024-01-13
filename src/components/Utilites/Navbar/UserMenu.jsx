@@ -58,7 +58,7 @@ const UserMenu = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95 -translate-y-6 translate-x-10"
           >
-            <Menu.Items className="absolute top-full right-0 flex flex-col bg-zinc-800 text-slate-200 rounded-bl-xl p-2 w-1/4">
+            <Menu.Items className="absolute top-full right-0 flex flex-col bg-zinc-800 text-slate-200 rounded-bl-xl p-2 w-1/2 md:1/4">
               <Menu.Item disabled>
                 {user ? (
                   <span className="text-xs opacity-70 px-4 pb-2">
