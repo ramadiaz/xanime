@@ -12,7 +12,7 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const watchlistData = Cookies.getJSON("bookmark") || [];
+      const watchlistData = Cookies.getJSON("watchlist") || [];
       setWatchList(watchlistData);
       setIsLoading(false);
     } catch (error) {
@@ -26,15 +26,15 @@ const Page = () => {
 
   const removeWatchlist = (id) => {
     const updateWatchlist = watchList.filter((item) => item.id !== id);
-    Cookies.set("bookmark", updateWatchlist);
+    Cookies.set("watchlist", updateWatchlist);
     location.reload()
   };
 
   return (
-    <div className="bookmark">
+    <div className="watch-list">
       <Header
-        title="Your Bookmark"
-        desc="List of manga you have added to your bookmark"
+        title="Your Watchlist"
+        desc="List of anime that you have added to"
       />
       {isLoading ? (
         <Loading />
@@ -60,7 +60,7 @@ const Page = () => {
                         <th className="py-2 px-4 w-10">{index + 1}.</th>
                         <td className="py-2 px-4">
                           <Link
-                            href={`manga/${watchlistItem.id}`}
+                            href={`anime/${watchlistItem.id}`}
                             className="hover:text-white hover:underline underline-offset-4 transition-all duration-300 text-left"
                           >
                             {watchlistItem.title}
@@ -77,7 +77,7 @@ const Page = () => {
                 ) : (
                   <tr className="border-b-1 border-b-zinc-700">
                     <td colSpan={3} className="py-2 px-4 text-center">
-                      Empty bookmark
+                      Empty watchlist
                     </td>
                   </tr>
                 )

@@ -87,7 +87,7 @@ const UserMenu = () => {
                   Bookmark
                 </Menu.Item>
               </Link>
-              <Link href="/favorite">
+              <Link href="/favorites">
                 <Menu.Item
                   as="div"
                   className="hover:bg-zinc-700 px-4 py-2 rounded-md"

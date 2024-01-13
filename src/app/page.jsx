@@ -120,7 +120,7 @@ const Home = async () => {
                   #{index + 1}
                 </h1>
                 <Link
-                  href={`/anime/${anime.mal_id}`}
+                  href={`/manga/${anime.mal_id}`}
                   className="w-max "
                   key={index}
                 >

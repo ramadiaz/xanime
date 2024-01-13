@@ -12,7 +12,7 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const watchlistData = Cookies.getJSON("bookmark") || [];
+      const watchlistData = Cookies.getJSON("favorite") || [];
       setWatchList(watchlistData);
       setIsLoading(false);
     } catch (error) {
@@ -26,15 +26,15 @@ const Page = () => {
 
   const removeWatchlist = (id) => {
     const updateWatchlist = watchList.filter((item) => item.id !== id);
-    Cookies.set("bookmark", updateWatchlist);
+    Cookies.set("favorite", updateWatchlist);
     location.reload()
   };
 
   return (
-    <div className="bookmark">
+    <div className="favorites">
       <Header
-        title="Your Bookmark"
-        desc="List of manga you have added to your bookmark"
+        title="Your favorite characters"
+        desc="List of characters that you have added to your favorites list"
       />
       {isLoading ? (
         <Loading />
@@ -44,7 +44,7 @@ const Page = () => {
             <thead className="bg-zinc-800">
               <tr>
                 <th className="py-2 px-4 w-10">No.</th>
-                <th className="py-2 px-4 ">Title</th>
+                <th className="py-2 px-4 ">Name</th>
                 <th className="py-2 px-4 w-32">Action</th>
               </tr>
             </thead>
@@ -60,10 +60,10 @@ const Page = () => {
                         <th className="py-2 px-4 w-10">{index + 1}.</th>
                         <td className="py-2 px-4">
                           <Link
-                            href={`manga/${watchlistItem.id}`}
+                            href={`character/${watchlistItem.id}`}
                             className="hover:text-white hover:underline underline-offset-4 transition-all duration-300 text-left"
                           >
-                            {watchlistItem.title}
+                            {watchlistItem.name}
                           </Link>
                         </td>
                         <td className="p-2 text-center">
@@ -77,7 +77,7 @@ const Page = () => {
                 ) : (
                   <tr className="border-b-1 border-b-zinc-700">
                     <td colSpan={3} className="py-2 px-4 text-center">
-                      Empty bookmark
+                      Empty favorite
                     </td>
                   </tr>
                 )
