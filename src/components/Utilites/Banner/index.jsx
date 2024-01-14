@@ -100,6 +100,7 @@ const Banner = () => {
               }
             >
               <Image
+                unoptimized={false}
                 src={bannerAPI.banner[currentIndex].logo}
                 alt={bannerAPI.banner[currentIndex].title}
                 width={300}
