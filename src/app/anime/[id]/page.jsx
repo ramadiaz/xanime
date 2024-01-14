@@ -17,6 +17,7 @@ const Page = ({ params: { id } }) => {
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   var episodeCounter = 0;
+  var episodeCounterM = 0;
 
   useEffect(() => {
     window.scrollTo({
@@ -86,7 +87,7 @@ const Page = ({ params: { id } }) => {
       className=" bg-zinc-950 text-slate-200 mx-auto flex flex-col gap-14"
       suppressHydrationWarning
     >
-      <div className="relative h-96 lg:h-120 -mt-32 hidden md:block">
+      <div className="relative h-96 lg:h-120 -mt-32">
         <Image
           src={anime.data?.images.webp.large_image_url}
           width={2470}
@@ -96,7 +97,7 @@ const Page = ({ params: { id } }) => {
         />
         <div className="absolute inset-0 -bottom-5 bg-gradient-to-t from-zinc-950 from-15%" />
       </div>
-      <div className="lg:w-2/3 w-11/12 mx-auto flex flex-col gap-14 z-10 bg-zinc-950">
+      <div className="lg:w-2/3 w-11/12 mx-auto flex flex-col gap-14 -mt-72 md:mt-0 z-10">
         <div className="flex flex-col md:flex-row justify-between pt-6 gap-8">
           <div className="flex flex-col gap-4 md:hidden">
             <div className="mx-auto">
@@ -124,19 +125,18 @@ const Page = ({ params: { id } }) => {
             </h2>
             <button
               onClick={isInWatchlist ? removeWatchlist : handleAddToWatchlist}
-              
-            > 
-            {isInWatchlist ? (
-              <div className="p-3 hover:bg-amber-400/75 hover:border-amber-400/75 transition-all border border-amber-400 flex flex-row gap-4 uppercase font-bold bg-amber-400">
-                <Bookmark size={24} color="#09090b" weight="fill"/>
-                <h3 className="text-zinc-950">Added to watchlist</h3>
-              </div>
-            ) : (
-              <div className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold">
-                <Bookmark size={24} color="#fde68a"/>
-                Add to Watchlist
-              </div>
-            )}
+            >
+              {isInWatchlist ? (
+                <div className="p-3 hover:bg-amber-400/75 hover:border-amber-400/75 transition-all border border-amber-400 flex flex-row gap-4 uppercase font-bold bg-amber-400">
+                  <Bookmark size={24} color="#09090b" weight="fill" />
+                  <h3 className="text-zinc-950">Added to watchlist</h3>
+                </div>
+              ) : (
+                <div className="p-3 hover:bg-amber-200/25 transition-all border border-amber-200 flex flex-row gap-4 uppercase font-bold">
+                  <Bookmark size={24} color="#fde68a" />
+                  Add to Watchlist
+                </div>
+              )}
             </button>
             <h2 className="pt-8 pb-3 border-b-1 border-b-slate-200/50">
               Synopsis
@@ -254,13 +254,9 @@ const Page = ({ params: { id } }) => {
                               {episodeCounter}
                             </th>
                             <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
-                              <Link
-                                href={`/anime/${id}/episodes/${episodeCounter}`}
-                              >
-                                <h3 className="text-slate-200 hover:text-slate-50 transition-all">
-                                  {episode.title}
-                                </h3>
-                              </Link>
+                              <h3 className="text-slate-200 hover:text-slate-50 transition-all">
+                                {episode.title}
+                              </h3>
                             </td>
                             <td className="px-2 py-4 text-center whitespace-nowrap">
                               ⭐ {episode.score}
@@ -310,10 +306,70 @@ const Page = ({ params: { id } }) => {
           </div>
         </div>
 
+        <div className="py-4 md:hidden">
+          <h2 className="text-2xl border-b-1 border-b-slate-200/50 pb-2">
+            Episodes
+          </h2>
+          <div className="relative mt-2 mx-auto max-h-120 overflow-y-auto">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase dark:bg-zinc-800 dark:text-gray-400 sticky top-0">
+                <tr className="">
+                  <th scope="col" className="px-2 py-3 text-center">
+                    Episode
+                  </th>
+                  <th scope="col" className="px-2 py-3 text-center">
+                    Title
+                  </th>
+                  <th scope="col" className="px-2 py-3 text-center">
+                    Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {loading ? (
+                  <tr>
+                    <td colSpan="3" className="px-2 py-4 text-center">
+                      Loading...
+                    </td>
+                  </tr>
+                ) : episodes.data && episodes.data.length > 0 ? (
+                  episodes.data.map((episode, index) => {
+                    episodeCounterM++;
+                    return (
+                      <tr className="dark:border-gray-700" key={index}>
+                        <th
+                          scope="row"
+                          className="px-2 py-4 text-gray-900 whitespace-nowrap dark:text-white text-center border-r border-zinc-700"
+                        >
+                          {episodeCounterM}
+                        </th>
+                        <td className="px-2 py-4 flex flex-row items-center gap-4 border-r border-zinc-700 ml-6">
+                          <h3 className="text-slate-200 hover:text-slate-50 transition-all">
+                            {episode.title}
+                          </h3>
+                        </td>
+                        <td className="px-2 py-4 text-center whitespace-nowrap">
+                          ⭐ {episode.score}
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="3" className="px-2 py-4 text-center">
+                      No data
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div className="text-slate-200">
           <h2 className="text-2xl text-white">More information</h2>
           <div className="flex flex-row w-full divide-x-1 divide-slate-200/50 gap-4 pt-2">
-            <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-sm">
+            <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-xs md:text-sm">
               <li className="w-full flex flex-row justify-between py-2">
                 <span>Rank</span>
                 <span className="opacity-70">
@@ -325,7 +381,8 @@ const Page = ({ params: { id } }) => {
               </li>
               <li className="w-full flex flex-row justify-between py-2">
                 <span>Popularity</span>
-                <span className="opacity-70">#{" "}
+                <span className="opacity-70">
+                  #{" "}
                   {anime.data?.popularity
                     ? anime.data.popularity.toLocaleString()
                     : "Unknown"}

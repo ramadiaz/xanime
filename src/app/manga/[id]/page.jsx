@@ -13,13 +13,6 @@ const Page = ({ params: { id } }) => {
   const [manga, setManga] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
   const fetchData = async () => {
     try {
       const mangaAPI = await getAnimeResponse(`manga/${id}/full`);
@@ -71,13 +64,20 @@ const Page = ({ params: { id } }) => {
 
   let counter = 0;
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <div className="app">
       {isLoading ? (
         <Loading />
       ) : (
         <div className="flex flex-col gap-14 mx-auto text-slate-200">
-          <div className="relative h-96 lg:h-120 -mt-32 hidden md:block">
+          <div className="relative h-96 lg:h-120 -mt-32">
             <Image
               src={manga.data?.images.webp.large_image_url}
               width={2470}
@@ -87,14 +87,15 @@ const Page = ({ params: { id } }) => {
             />
             <div className="absolute inset-0 -bottom-5 bg-gradient-to-t from-zinc-950 from-15%" />
           </div>
-          <div className="lg:w-2/3 w-11/12 mt-12 mx-auto flex flex-col gap-14 z-10 bg-zinc-950">
-            <div className="flex flex-row gap-4 divide-x-1 divide-slate-200/50 border-b-1 border-b-slate-200/50 pb-4">
+          <div className="lg:w-2/3 w-11/12 -mt-40 md:mt-12 mx-auto flex flex-col gap-14 z-10">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-4 md:divide-x-1  divide-slate-200/50 border-b-1 border-b-slate-200/50 pb-4">
               <div className="basis-1/4 flex flex-col gap-4">
                 <Image
                   src={manga.data?.images.webp.large_image_url}
                   width={350}
                   height={350}
                   alt={`poster of ${manga.data?.title}`}
+                  className="hidden md:block"
                 />
                 <button
                   onClick={isInBookmark ? removeBookmark : handleAddBookmark}
@@ -112,7 +113,7 @@ const Page = ({ params: { id } }) => {
                   )}
                 </button>
               </div>
-              <div className="basis-3/4 pl-4">
+              <div className="basis-3/4 md:pl-4">
                 <div className="">
                   <h1 className="text-2xl text-white">
                     {manga.data.title} ({manga.data.title_japanese})
@@ -150,7 +151,7 @@ const Page = ({ params: { id } }) => {
             <div className="text-slate-200">
               <h2 className="text-2xl text-white">More information</h2>
               <div className="flex flex-row w-full divide-x-1 divide-slate-200/50 gap-4 pt-2">
-                <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-sm">
+                <ul className="basis-2/5 divide-y-1 divide-slate-200/50 text-xs md:text-sm">
                   <li className="w-full flex flex-row justify-between py-2">
                     <span>Rank</span>
                     <span className="opacity-70">

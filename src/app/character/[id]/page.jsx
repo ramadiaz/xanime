@@ -14,13 +14,7 @@ const Page = ({ params: { id } }) => {
   const [character, setCharacter] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
+  
   const fetchData = async () => {
     try {
       const characterAPI = await getAnimeResponse(`characters/${id}/full`);
@@ -58,24 +52,41 @@ const Page = ({ params: { id } }) => {
       setIsFavorite(true);
     }
   };
-
+  
   const removeFavorite = () => {
     const existingFavorite = Cookies.getJSON("favorite") || [];
-
+    
     const updateFavorite = existingFavorite.filter((item) => item.id !== id);
     Cookies.set("favorite", updateFavorite);
     setIsFavorite(false);
   };
-
+  
   const aboutLines = character.data?.about?.split("\n");
-
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <div className="app">
       {isLoading ? (
         <Loading />
       ) : (
         <div className="bg-zinc-950 text-slate-200 mx-auto flex flex-col gap-14">
-          <div className="lg:w-2/3 w-11/12 mx-auto flex flex-col gap-14 bg-zinc-950">
+            
+            <div className="relative h-96 lg:h-120 -mt-14 md:hidden z-0">
+              <Image
+                src={character.data?.images.webp.image_url}
+                width={2470}
+                height={3500}
+                alt={`poster of ${character.data?.name}`}
+                className="absolute h-96 lg:h-120  object-cover blur-sm"
+              />
+              <div className="absolute inset-0 -bottom-5 bg-gradient-to-t from-zinc-950 from-15%" />
+            </div>
+          <div className="lg:w-2/3 w-11/12 mx-auto flex flex-col gap-14 -mt-72 md:mt-0 z-10">
             <div className="pt-12">
               <h1 className="text-2xl text-slate-200 font-bold">
                 Character information
@@ -84,14 +95,14 @@ const Page = ({ params: { id } }) => {
                 Everything we know about {character.data?.name}
               </h2>
             </div>
-            <div className="flex flex-row divide-x-1 divide-slate-200/50 gap-4">
+            <div className="flex flex-col md:flex-row divide-x-1 divide-slate-200/50 gap-4 -mt-8 md:mt-0">
               <div className="flex flex-col gap-4 basis-1/4">
                 <Image
                   src={character.data?.images.webp.image_url}
                   width={350}
                   height={350}
                   alt={`image of ${character.data?.name}`}
-                  className="w-full h-fit object-cover"
+                  className="w-full h-fit object-cover hidden md:block"
                 />
                 <button
                   onClick={isFavorite ? removeFavorite : handleAddFavorite}
@@ -138,7 +149,7 @@ const Page = ({ params: { id } }) => {
                         leaveFrom="transform opacity-100"
                         leaveTo="transform opacity-0 -translate-y-5"
                       >
-                        <div className="space-y-2">
+                        <div className="space-y-2 pb-4">
                           {character.data?.voices.map((voice) => {
                             return (
                               <Disclosure.Panel className="text-sm">
@@ -162,14 +173,14 @@ const Page = ({ params: { id } }) => {
                   </h3>
                 </div>
                 <h2 className="text-sm py-4">
-                  {aboutLines? aboutLines.map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      {index !== aboutLines.length - 1 && <br />}{" "}
-                    </React.Fragment>
-                  )) : (
-                    "No information"
-                  )}
+                  {aboutLines
+                    ? aboutLines.map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          {index !== aboutLines.length - 1 && <br />}{" "}
+                        </React.Fragment>
+                      ))
+                    : "No information"}
                 </h2>
               </div>
             </div>

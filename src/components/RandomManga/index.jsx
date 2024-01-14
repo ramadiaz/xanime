@@ -32,9 +32,12 @@ const RandomManga = () => {
   }, []);
 
   return (
-    <div className="relative mx-auto w-11/12 lg:w-2/3 bg-zinc-800 text-slate-200 h-96">
+    <div className="relative mx-auto w-11/12 lg:w-2/3 bg-zinc-800 text-slate-200 min-h-96">
       {isLoading ? (
+        <div className="h-96">
+
         <SmallLoading />
+        </div>
       ) : (
         <div className="p-6 flex flex-col gap-6 h-full">
           <div className="flex flex-row gap-6">
@@ -54,7 +57,7 @@ const RandomManga = () => {
                     {random.data?.synopsis ? random.data.synopsis : "There is no synopsis for this anime"}
                     {random.data?.synopsis}</h3>
               </div>
-              <div className="space-x-2 space-y-2 py-6 max-w-full">
+              <div className="space-x-2 space-y-2 pb-12 pt-4 md:py-6 max-w-full">
                 {random.data?.genres &&
                   random.data?.genres.slice(0, 3).map((genre) => (
                     <button
