@@ -15,6 +15,12 @@ const Banner = () => {
     "banner_another.png",
   ];
 
+  const logoImages = [
+    "logo_rikka.png",
+    "logo_lain.png",
+    "logo_another.png"
+  ]
+
   useEffect(() => {
     const getBannerData = async () => {
       const data = await getBannerResponse();
@@ -101,7 +107,7 @@ const Banner = () => {
             >
               <Image
                 unoptimized={false}
-                src={bannerAPI.banner[currentIndex].logo}
+                src={`/logo/${logoImages[currentIndex]}`}
                 alt={bannerAPI.banner[currentIndex].title}
                 width={300}
                 height={180}
