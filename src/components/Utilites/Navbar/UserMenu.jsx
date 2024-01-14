@@ -16,7 +16,6 @@ const UserMenu = () => {
     try {
       const userData = await authUserSession();
       setUser(userData);
-      console.log(userData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);

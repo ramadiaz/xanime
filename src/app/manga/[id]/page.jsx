@@ -164,6 +164,7 @@ const Page = ({ params: { id } }) => {
                   <li className="w-full flex flex-row justify-between py-2">
                     <span>Popularity</span>
                     <span className="opacity-70">
+                      #{" "}
                       {manga.data?.popularity
                         ? manga.data.popularity.toLocaleString()
                         : "Unknown"}
