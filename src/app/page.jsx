@@ -1,4 +1,4 @@
-import { getAnimeResponse } from "./libs/api-libs";
+import { getAnimeResponse, getTopMangaResponse } from "./libs/api-libs";
 import Header from "@/components/Utilites/Header";
 import AnimeList from "@/components/AnimeList";
 import Banner from "@/components/Utilites/Banner";
@@ -10,7 +10,7 @@ import RandomAnime from "@/components/RandomAnime";
 const Home = async () => {
   const seasonUpcoming = await getAnimeResponse("seasons/upcoming", "limit=12");
   const topAnime = await getAnimeResponse("top/anime", "limit=10");
-  const topManga = await getAnimeResponse("top/manga", "limit=10")
+  const topManga = await getTopMangaResponse()
   const seasonsNow = await getAnimeResponse("seasons/now", "limit=12");
   return (
     <div className="bg-zinc-950">
@@ -113,7 +113,7 @@ const Home = async () => {
         />
 
         <div className="flex flex-row gap-6 overflow-x-auto overflow-y-hidden custom-scrollbar mx-auto w-11/12 lg:w-2/3 -mt-4">
-          {topManga.data?.map((anime, index) => {
+          {topManga.data?.slice(0, 10).map((anime, index) => {
             return (
               <div className="flex flex-row pb-2 gap-4 scale-90">
                 <h1 className="text-5xl font-bold text-slate-200 pt-2">
