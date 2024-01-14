@@ -2,6 +2,8 @@ import Navbar from "@/components/Utilites/Navbar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Utilites/Footer";
+import { Analytics } from '@vercel/analytics'
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +19,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <div className="min-h-screen bg-zinc-950">{children}</div>
         <Footer/>
+        <Analytics/>
       </body>
     </html>
   );
