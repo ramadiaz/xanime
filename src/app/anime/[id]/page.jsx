@@ -361,7 +361,7 @@ const Page = ({ params: { id } }) => {
           </div>
         </div>
 
-        {recommendations.data > 0 && (
+        {recommendations.data?.length > 0 && (
           <div className="flex flex-col gap-5 mt-10">
             <h2 className="text-2xl text-white">Recommendations</h2>
             <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:gap-8 md:gap-10 gap-4">
@@ -376,7 +376,6 @@ const Page = ({ params: { id } }) => {
                     alt={recommendation.entry.title}
                     width={350}
                     height={350}
-                    loader={lazy}
                     className="w-full h-64 object-cover hover:scale-105 transition-all duration-300"
                   />
                   <h2 className="pt-4 hover:text-slate-200/90">
