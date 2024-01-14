@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className="flex flex-row">
           <Link href="../../../search">
-            <button className="p-5 hover:bg-zinc-900 transition-all">
+            <button className="p-3 md:p-5 hover:bg-zinc-900 transition-all">
               <MagnifyingGlass size={24} color="#fdfcfc" />
             </button>
           </Link>

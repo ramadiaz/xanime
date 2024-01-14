@@ -31,12 +31,12 @@ const UserMenu = () => {
   return (
     <div className="userMenu">
       {isLoading ? (
-        <div className="scale-50 text-center p-2">
+        <div className="scale-50 text-center md:p-2">
           <SmallLoading />
         </div>
       ) : (
         <Menu>
-          <Menu.Button className="p-5 hover:bg-zinc-900 transition-all">
+          <Menu.Button className="p-3 md:p-5 hover:bg-zinc-900 transition-all">
             {user ? (
               <Image
                 src={user.image}

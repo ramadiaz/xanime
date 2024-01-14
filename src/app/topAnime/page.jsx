@@ -30,7 +30,7 @@ const Page = () => {
       ) : (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg lg:w-2/3 w-11/12 mx-auto">
           <div className="py-12">
-            <h1 className="text-2xl text-slate-200 font-bold">TOP 20 ANIME</h1>
+            <h1 className="text-2xl text-slate-200 font-bold">Top 20 Anime</h1>
             <h2 className="text-slate-200/70">Based on My Anime List</h2>
           </div>
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

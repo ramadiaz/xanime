@@ -11,7 +11,7 @@ const Header = ({ title, desc, linkHref, linkTitle }) => {
       {linkHref && linkTitle ? (
         <Link
           href={linkHref}
-          className="text-xl text-amber-300 hover:text-slate-200 transition-all"
+          className="whitespace-nowrap text-lg text-amber-300 hover:text-slate-200 transition-all"
         >
           {linkTitle}
         </Link>

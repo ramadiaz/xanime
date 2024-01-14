@@ -48,7 +48,7 @@ const Banner = () => {
     <div>
       {bannerAPI.banner && (
         <div
-          className="relative w-full h-40 md:h-96 lg:h-120 bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
+          className="relative w-full h-60 md:h-96 lg:h-120 bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
           style={{
             backgroundImage: `url(/banner/${bannerImages[currentIndex]})`,
           }}
@@ -59,7 +59,7 @@ const Banner = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-slate-200"
+              className="h-4 w-4  md:h-6 md:w-6 text-slate-200"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -78,7 +78,7 @@ const Banner = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-slate-200"
+              className="h-4 w-4  md:h-6 md:w-6 text-slate-200"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -91,7 +91,7 @@ const Banner = () => {
               />
             </svg>
           </button>
-          <div className="absolute left-10 md:left-16 lg:left-24 transition-all duration-500 ease-in-out top-1/3 md:top-1/2">
+          <div className="absolute left-10 md:left-16 lg:left-24 transition-all duration-500 ease-in-out top-1/2 -translate-y-1/2 md:translate-y-0">
             <Link
               href={
                 bannerAPI.banner && bannerAPI.banner[currentIndex]
@@ -104,13 +104,13 @@ const Banner = () => {
                 alt={bannerAPI.banner[currentIndex].title}
                 width={300}
                 height={180}
-                className="w-max h-10 md:h-20 lg:h-32 hover:scale-105 transition-all duration-300"
+                className="w-max h-12 md:h-20 lg:h-32 hover:scale-105 transition-all duration-300"
               />
             </Link>
-            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">
+            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4 hidden md:block">
               Genres | {bannerAPI.banner[currentIndex].genre}
             </h2>
-            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4">
+            <h2 className="text-xs md:text-sm lg:text-base text-zinc-300 ml-2 lg:ml-4 hidden md:block">
               {bannerAPI.banner[currentIndex].rating}
             </h2>
           </div>
