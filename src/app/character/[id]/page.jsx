@@ -3,7 +3,7 @@
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import Loading from "@/app/loading";
 import { Disclosure, Transition } from "@headlessui/react";
-import { CaretDown, CaretUp, HeartStraight } from "@phosphor-icons/react";
+import { CaretDown, HeartStraight } from "@phosphor-icons/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";

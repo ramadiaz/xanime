@@ -1,4 +1,3 @@
-import RandomAnime from "@/components/RandomAnime";
 import RandomManga from "@/components/RandomManga";
 import Header from "@/components/Utilites/Header";
 
