@@ -69,7 +69,7 @@ const Page = ({ params: { id } }) => {
         ...existingWatchlist,
         { id, title: anime.data?.title },
       ];
-      Cookies.set("watchlist", updatedWatchlist);
+      Cookies.set("watchlist", updatedWatchlist, { expires: 365 * 10 });
       setIsInWatchlist(true);
     }
   };

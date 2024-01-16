@@ -49,7 +49,7 @@ const Page = ({ params: { id } }) => {
         ...existingBookmark,
         { id, title: manga.data?.title },
       ];
-      Cookies.set("bookmark", updateBookmark);
+      Cookies.set("bookmark", updateBookmark, { expires: 365 * 10 });
       setIsInBookmark(true);
     }
   };

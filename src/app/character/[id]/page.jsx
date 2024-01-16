@@ -48,7 +48,7 @@ const Page = ({ params: { id } }) => {
         ...existingFavorite,
         { id, name: character.data?.name },
       ];
-      Cookies.set("favorite", updateFavorite);
+      Cookies.set("favorite", updateFavorite, { expires: 365 * 10 });
       setIsFavorite(true);
     }
   };
