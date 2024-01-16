@@ -21,7 +21,7 @@ const Home = async () => {
           title="Airing Now"
           desc="New anime released this season"
           linkTitle="See all"
-          linkHref="/airingAnime"
+          linkHref="/airing-anime"
         />
         <AnimeList api={seasonsNow} />
       </section>
@@ -31,7 +31,7 @@ const Home = async () => {
           title="Top Tier Anime List 🔥"
           desc="Ranking of anime with the highest scores based on myanimelist"
           linkTitle="See all"
-          linkHref="/topAnime"
+          linkHref="/top-anime"
         />
 
         <div className="flex flex-row gap-6 overflow-x-auto overflow-y-hidden custom-scrollbar mx-auto w-11/12 lg:w-2/3 -mt-4">
@@ -99,7 +99,7 @@ const Home = async () => {
           title="Upcoming Anime"
           desc="Anime that will be released soon"
           linkTitle="See all"
-          linkHref="/upcomingAnime"
+          linkHref="/upcoming-anime"
         />
         <AnimeList api={seasonUpcoming} />
       </section>
@@ -109,7 +109,7 @@ const Home = async () => {
           title="Top Tier Manga List"
           desc="Ranking of manga with the highest scores based on myanimelist"
           linkTitle="See all"
-          linkHref="/topManga"
+          linkHref="/top-manga"
         />
 
         <div className="flex flex-row gap-6 overflow-x-auto overflow-y-hidden custom-scrollbar mx-auto w-11/12 lg:w-2/3 -mt-4">

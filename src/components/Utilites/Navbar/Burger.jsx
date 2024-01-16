@@ -32,25 +32,25 @@ const Burger = () => {
             <li className="pl-4 py-2 uppercase text-xs font-bold text-slate-200/80">
               Discover
             </li>
-            <Link href="/airingAnime" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/airing-anime" className="pl-4 py-2 hover:bg-zinc-700">
               Airing Anime
             </Link>
-            <Link href="/upcomingAnime" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/upcoming-anime" className="pl-4 py-2 hover:bg-zinc-700">
               Upcoming Anime
             </Link>
-            <Link href="/topAnime" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/top-anime" className="pl-4 py-2 hover:bg-zinc-700">
               Top 20 Anime
             </Link>
-            <Link href="/topManga" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/top-manga" className="pl-4 py-2 hover:bg-zinc-700">
               Top 20 Manga
             </Link>
-            <Link href="/topCharacter" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/top-character" className="pl-4 py-2 hover:bg-zinc-700">
               Top 20 Character
             </Link>
-            <Link href="/randomAnime" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/random-anime" className="pl-4 py-2 hover:bg-zinc-700">
               Gacha Random Anime
             </Link>
-            <Link href="/randomManga" className="pl-4 py-2 hover:bg-zinc-700">
+            <Link href="/random-manga" className="pl-4 py-2 hover:bg-zinc-700">
               Gacha Random Manga
             </Link>
           </ul>

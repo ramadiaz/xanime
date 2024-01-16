@@ -23,7 +23,7 @@ const Page = () => {
     event.preventDefault()
     const keyword = searchRef.current.value
 
-    router.push(`searchResult/${keyword}`)
+    router.push(`search-result/${keyword}`)
   };
 
   const handleKeyDown = (event) => {
