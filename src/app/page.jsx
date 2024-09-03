@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import DeveloperRecommendations from "@/components/DeveloperRecommendations";
 import RandomAnime from "@/components/RandomAnime";
+import { Analytics } from "@vercel/analytics/react";
 
 const Home = async () => {
   const seasonUpcoming = await getAnimeResponse("seasons/upcoming", "limit=12");
@@ -187,6 +188,7 @@ const Home = async () => {
         />
         <RandomAnime/>
       </section>
+      <Analytics />
     </div>
   );
 };
