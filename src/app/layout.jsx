@@ -6,8 +6,8 @@ import Footer from "@/components/Utilites/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "XAnimeList",
-  description: "Anime Tier List by Xanny",
+  title: "Xanime - Your Ultimate Anime Information Hub",
+  description: "Discover the latest anime news, reviews, character profiles, and an extensive anime database at Xanime. Stay updated on all things anime!",
 };
 
 export default function RootLayout({ children }) {
